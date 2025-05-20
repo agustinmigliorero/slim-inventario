@@ -1,5 +1,5 @@
 <?php
-require_once '../controllers/controllersCategoria.php';
+require_once '../controllers/controllersCategorias.php';
 
 $app->group('/categorias', function ($app) {
     $app->get('', "getAllCategorias");

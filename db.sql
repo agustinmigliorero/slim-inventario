@@ -34,6 +34,7 @@ CREATE TABLE ventas (
     cliente_id INT NOT NULL,
     metodo_pago VARCHAR(50) NOT NULL,
     notas TEXT,
+    mano_obra DECIMAL(11,2) NOT NULL DEFAULT 0,
     fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     estado ENUM('pendiente', 'confirmada', 'cancelada') NOT NULL DEFAULT 'pendiente',
     FOREIGN KEY (cliente_id) REFERENCES clientes(id)
@@ -47,7 +48,7 @@ CREATE TABLE venta_productos (
     producto_id INT NOT NULL,
     cantidad INT NOT NULL,
     precio_unitario DECIMAL(11,2) NOT NULL,
-    FOREIGN KEY (venta_id) REFERENCES ventas(id),
+    FOREIGN KEY (venta_id) REFERENCES ventas(id), ON DELETE CASCADE
     FOREIGN KEY (producto_id) REFERENCES productos(id)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
