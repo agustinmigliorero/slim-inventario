@@ -1,28 +1,16 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { BarChart3, Download, LineChart, PieChart } from "lucide-react";
+import { useState } from "react"
+import { BarChart3, Download, LineChart, PieChart } from "lucide-react"
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { DatePickerWithRange } from "@/components/date-range-picker";
-import type { DateRange } from "react-day-picker";
-import { addDays } from "date-fns";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Overview } from "@/components/overview";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { DatePickerWithRange } from "@/components/date-range-picker"
+import type { DateRange } from "react-day-picker"
+import { addDays } from "date-fns"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Overview } from "@/components/overview"
 import {
   PieChart as RePieChart,
   Pie,
@@ -35,9 +23,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-} from "recharts";
+} from "recharts"
 
-const COLORS = ["#16a34a", "#22c55e", "#4ade80", "#86efac", "#bbf7d0"];
+const COLORS = ["#16a34a", "#22c55e", "#4ade80", "#86efac", "#bbf7d0"]
 
 const pieData = [
   { name: "Semillas", value: 45 },
@@ -45,7 +33,7 @@ const pieData = [
   { name: "Herbicidas", value: 15 },
   { name: "Maquinaria", value: 10 },
   { name: "Otros", value: 5 },
-];
+]
 
 const lineData = [
   { name: "Ene", semillas: 400000, fertilizantes: 240000, herbicidas: 200000 },
@@ -55,13 +43,13 @@ const lineData = [
   { name: "May", semillas: 189000, fertilizantes: 480000, herbicidas: 218000 },
   { name: "Jun", semillas: 239000, fertilizantes: 380000, herbicidas: 250000 },
   { name: "Jul", semillas: 349000, fertilizantes: 430000, herbicidas: 210000 },
-];
+]
 
 export default function ReportesPage() {
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(2023, 0, 1),
     to: addDays(new Date(), 0),
-  });
+  })
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
@@ -96,9 +84,7 @@ export default function ReportesPage() {
           <Card>
             <CardHeader>
               <CardTitle>Ventas por Período</CardTitle>
-              <CardDescription>
-                Análisis de ventas durante el período seleccionado
-              </CardDescription>
+              <CardDescription>Análisis de ventas durante el período seleccionado</CardDescription>
               <div className="flex justify-end">
                 <Select defaultValue="mensual">
                   <SelectTrigger className="w-[180px]">
@@ -124,9 +110,7 @@ export default function ReportesPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Distribución de Ventas por Categoría</CardTitle>
-                <CardDescription>
-                  Porcentaje de ventas por categoría de producto
-                </CardDescription>
+                <CardDescription>Porcentaje de ventas por categoría de producto</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -136,18 +120,13 @@ export default function ReportesPage() {
                       cx="50%"
                       cy="50%"
                       labelLine={false}
-                      label={({ name, percent }) =>
-                        `${name}: ${(percent * 100).toFixed(0)}%`
-                      }
+                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
                     >
                       {pieData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}
-                        />
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
                     <Tooltip />
@@ -158,89 +137,62 @@ export default function ReportesPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Productos Más Vendidos</CardTitle>
-                <CardDescription>
-                  Top productos por volumen de ventas
-                </CardDescription>
+                <CardDescription>Top productos por volumen de ventas</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <div className="w-full">
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">
-                          Semilla de Maíz Premium
-                        </span>
+                        <span className="text-sm font-medium">Semilla de Maíz Premium</span>
                         <span className="text-sm font-medium">78%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-green-600 h-2.5 rounded-full"
-                          style={{ width: "78%" }}
-                        ></div>
+                        <div className="bg-green-600 h-2.5 rounded-full" style={{ width: "78%" }}></div>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-full">
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">
-                          Fertilizante NPK 20-20-20
-                        </span>
+                        <span className="text-sm font-medium">Fertilizante NPK 20-20-20</span>
                         <span className="text-sm font-medium">65%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-green-600 h-2.5 rounded-full"
-                          style={{ width: "65%" }}
-                        ></div>
+                        <div className="bg-green-600 h-2.5 rounded-full" style={{ width: "65%" }}></div>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-full">
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">
-                          Semilla de Soja RR
-                        </span>
+                        <span className="text-sm font-medium">Semilla de Soja RR</span>
                         <span className="text-sm font-medium">52%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-green-600 h-2.5 rounded-full"
-                          style={{ width: "52%" }}
-                        ></div>
+                        <div className="bg-green-600 h-2.5 rounded-full" style={{ width: "52%" }}></div>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-full">
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">
-                          Herbicida Selectivo
-                        </span>
+                        <span className="text-sm font-medium">Herbicida Selectivo</span>
                         <span className="text-sm font-medium">45%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-green-600 h-2.5 rounded-full"
-                          style={{ width: "45%" }}
-                        ></div>
+                        <div className="bg-green-600 h-2.5 rounded-full" style={{ width: "45%" }}></div>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-full">
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">
-                          Pulverizadora Manual 20L
-                        </span>
+                        <span className="text-sm font-medium">Pulverizadora Manual 20L</span>
                         <span className="text-sm font-medium">32%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div
-                          className="bg-green-600 h-2.5 rounded-full"
-                          style={{ width: "32%" }}
-                        ></div>
+                        <div className="bg-green-600 h-2.5 rounded-full" style={{ width: "32%" }}></div>
                       </div>
                     </div>
                   </div>
@@ -254,9 +206,7 @@ export default function ReportesPage() {
           <Card>
             <CardHeader>
               <CardTitle>Tendencias de Ventas por Categoría</CardTitle>
-              <CardDescription>
-                Evolución de ventas por categoría de producto
-              </CardDescription>
+              <CardDescription>Evolución de ventas por categoría de producto</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={400}>
@@ -272,24 +222,10 @@ export default function ReportesPage() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
-                  <Tooltip
-                    formatter={(value) => [
-                      `$${value.toLocaleString()}`,
-                      undefined,
-                    ]}
-                  />
+                  <Tooltip formatter={(value) => [`$${value.toLocaleString()}`, undefined]} />
                   <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="semillas"
-                    stroke="#16a34a"
-                    activeDot={{ r: 8 }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="fertilizantes"
-                    stroke="#22c55e"
-                  />
+                  <Line type="monotone" dataKey="semillas" stroke="#16a34a" activeDot={{ r: 8 }} />
+                  <Line type="monotone" dataKey="fertilizantes" stroke="#22c55e" />
                   <Line type="monotone" dataKey="herbicidas" stroke="#4ade80" />
                 </ReLineChart>
               </ResponsiveContainer>
@@ -298,5 +234,5 @@ export default function ReportesPage() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

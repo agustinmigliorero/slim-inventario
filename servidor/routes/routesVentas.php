@@ -9,4 +9,3 @@ $app->group('/ventas', function ($app) {
     $app->put('/{id}', "updateVenta");
     $app->delete('/{id}', "deleteVenta");
 });
-
